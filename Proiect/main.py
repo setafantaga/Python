@@ -101,10 +101,3 @@ if(command == "find"):
         print("We don't know that arguments.")
 else:
     exit("We don't know that command")
-
-
-# import os
-# import datetime
-# import os.path, time
-# print("Last modified: %s" % time.ctime(os.path.getmtime("directory/files/a.txt")))
-# print("Created: %s" % time.ctime(os.path.getctime("directory/files/a.txt")))
