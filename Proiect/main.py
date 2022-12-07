@@ -33,23 +33,13 @@ def findBySize(size, path):
     return result
 
 # find by last date time modified
-def findByModifiedTime(path, data_entry):
+def findByTime(path, data_entry):
     result = []
     for root, dirs, files in os.walk(path):
         for file in files:
             path = os.path.join(root, file)
-            if time.ctime(os.path.getmtime(path)) == data_entry:
-                result.append(path)
-    return result
-
-
-# find by last date time accessed
-def findByCreatedTime(path, data_entry):
-    result = []
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            path = os.path.join(root, file)
-            if time.ctime(os.path.getmtime(path)) == data_entry:
+            data = time.ctime(os.stat(path).st_mtime)
+            if data == data_entry:
                 result.append(path)
     return result
 
@@ -88,11 +78,7 @@ if(command == "find"):
     # if the second argument is mtime, find the file by the last date modified
     elif (arguments == "-mtime"):
         # give the date of file
-        print(findByModifiedTime(path, value))
-    # if the second argument is ctime, fine the file by the created date of file
-    elif (arguments == "-ctime"):
-        # give the date of file
-        print(findByCreatedTime(path, value))
+        print(findByTime(path, value))
     # if the second argument is perm, find by kind of permission of file
     elif (arguments == "-perm"):
         # give the permission
@@ -101,3 +87,5 @@ if(command == "find"):
         print("We don't know that arguments.")
 else:
     exit("We don't know that command")
+
+
